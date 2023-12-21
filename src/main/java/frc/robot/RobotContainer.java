@@ -6,8 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.*;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -25,6 +24,7 @@ public class RobotContainer {
   public final Joystick joystick = new Joystick(OperatorConstants.kDriverControllerPort);
   public final Drivetrain rob = new Drivetrain();
   private final Claw claw = new Claw();
+  public final Intake intake = new Intake();
 
 
 
@@ -37,6 +37,10 @@ public class RobotContainer {
       () -> joystick.getRawAxis(0),
       () -> joystick.getRawAxis(1)
     ));
+
+    
+    
+    
   
     // Configure the trigger bindings
     configureBindings();
@@ -54,6 +58,7 @@ public class RobotContainer {
   private void configureBindings() {
     ClawCMD open = new ClawCMD(claw);
     new JoystickButton(joystick, 1).toggleOnTrue(open);//Button LB
+    new JoystickButton(joystick, 2).onTrue(new IntakeCommands(intake));
   }
 
   /**
