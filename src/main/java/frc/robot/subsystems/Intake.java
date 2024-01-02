@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase{
     TalonSRX motor10;
-    public boolean isSpinning = true;
+    public boolean isSpinning = false;
 
     public Intake(){
         motor10 = new TalonSRX(10);
@@ -17,10 +17,13 @@ public class Intake extends SubsystemBase{
         if(isSpinning){
             motor10.set(TalonSRXControlMode.PercentOutput, 0.5);
         }
-
-        else{
+        else if(!isSpinning){
             motor10.set(TalonSRXControlMode.PercentOutput, 0);
         }
+    }
+
+    public boolean getSpinning(){
+        return isSpinning;
     }
 
     public void toggleSpinning(){
@@ -29,15 +32,7 @@ public class Intake extends SubsystemBase{
 
     @Override
     public void periodic(){
-        if(isSpinning){
-            System.out.println("set to 0.5");
-            motor10.set(TalonSRXControlMode.PercentOutput, 0.5);
-        }
-
-        else{
-            System.out.println("set to 0");
-            motor10.set(TalonSRXControlMode.PercentOutput, 0);
-        }
+        setMotors();
     }
 
 

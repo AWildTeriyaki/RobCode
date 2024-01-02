@@ -58,7 +58,7 @@ public class RobotContainer {
   private void configureBindings() {
     ClawCMD open = new ClawCMD(claw);
     new JoystickButton(joystick, 1).toggleOnTrue(open);//Button LB
-    new JoystickButton(joystick, 2).onTrue(new IntakeCommands(intake));
+    new JoystickButton(joystick, 2).toggleOnTrue(new IntakeCommands(intake));
   }
 
   /**

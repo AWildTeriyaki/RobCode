@@ -7,26 +7,33 @@ import java.util.function.Supplier;
 
 public class IntakeCommands extends CommandBase{
 
-    private boolean isSpinning = true;
+    private boolean isSpinning = false;
     Intake intake = new Intake();
 
     public IntakeCommands(Intake intake){
         this.intake = intake;
-        //addRequirements(intake);
+        addRequirements(intake);
     }
 
     @Override
     public void execute(){
         intake.toggleSpinning();
+        isSpinning = !isSpinning;
     }
 
-    public void end(){
+    @Override
+    public void end(boolean interrupted){
 
     }
 
     @Override
     public boolean isFinished(){
-        return false;
+        if(isSpinning){
+            return false;
+        }else if(!isSpinning){
+            return true;
+        }
+        return true;
     }
 
 
