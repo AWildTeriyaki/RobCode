@@ -19,6 +19,7 @@ public class ClawCMD extends CommandBase {
 
   @Override
   public void execute() {
+    System.out.println("WWWWWWW");
     if(isOpen){
       claw.openClaw();
     }

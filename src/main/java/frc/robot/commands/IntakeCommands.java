@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 
 public class IntakeCommands extends CommandBase{
 
-    private boolean isSpinning = false;
     Intake intake = new Intake();
 
     public IntakeCommands(Intake intake){
@@ -16,24 +15,32 @@ public class IntakeCommands extends CommandBase{
     }
 
     @Override
+    public void initialize() {
+     
+    }
+
+
+    @Override
     public void execute(){
-        intake.toggleSpinning();
-        isSpinning = !isSpinning;
+        intake.toggle();
+        System.out.println("WWWWWWWWWWWWWW");
+        intake.setSpeed(0.5);
+
     }
 
     @Override
     public void end(boolean interrupted){
-
+        intake.setSpeed(0);
     }
 
     @Override
     public boolean isFinished(){
-        if(isSpinning){
-            return false;
-        }else if(!isSpinning){
+        if(intake.getIsSpinning()){
             return true;
+        }else if(!intake.getIsSpinning()){
+            return false;
         }
-        return true;
+        return false;
     }
 
 
