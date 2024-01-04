@@ -5,11 +5,11 @@ import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.Supplier;
 
-public class IntakeCommands extends CommandBase{
+public class OutakeCommands extends CommandBase{
     private boolean previous;    
     Intake intake = new Intake();
 
-    public IntakeCommands(Intake intake){
+    public OutakeCommands(Intake intake){
         this.intake = intake;
         addRequirements(intake);
     }
@@ -29,7 +29,7 @@ public class IntakeCommands extends CommandBase{
     @Override
     public void end(boolean interrupted){
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        intake.makeDirectionTrue();
+        intake.makeDirectionFalse();
     }
 
     @Override

@@ -7,15 +7,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase{
     TalonSRX motor10;
-    public double speed;
-    public boolean isSpinning = true;
+    public static boolean isSpinning = false;
+    public static boolean checkDirection = true;
 
     public Intake(){
         motor10 = new TalonSRX(10);
-    }
-
-    public void setSpeed(double speed){
-        this.speed = speed;
     }
 
     public void setIsSpinning(boolean spin){
@@ -26,18 +22,30 @@ public class Intake extends SubsystemBase{
         isSpinning = !isSpinning;
     }
 
+    public void makeDirectionTrue(){
+        checkDirection = true;
+    }
+
+    public void makeDirectionFalse(){
+        checkDirection = false;
+    }
+
     public boolean getIsSpinning(){
         return isSpinning;
     }
 
 
-    public void setMotors(){
-        motor10.set(TalonSRXControlMode.PercentOutput, speed);
-    }
 
     @Override
     public void periodic(){
-        setMotors();
+        System.out.println(isSpinning && checkDirection);
+        if(isSpinning == true){
+            motor10.set(TalonSRXControlMode.PercentOutput , -0.5);
+        }else if(isSpinning && !checkDirection){
+            motor10.set(TalonSRXControlMode.PercentOutput , 0.5);
+        }else{
+            motor10.set(TalonSRXControlMode.PercentOutput , 0);
+        }
     }
 
 

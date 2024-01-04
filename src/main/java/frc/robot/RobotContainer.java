@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Extender;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,6 +25,7 @@ public class RobotContainer {
   public final Joystick joystick = new Joystick(OperatorConstants.kDriverControllerPort);
   public final Drivetrain rob = new Drivetrain();
   private final Claw claw = new Claw();
+  private final Extender extender = new Extender();
   public final Intake intake = new Intake();
 
 
@@ -58,8 +60,12 @@ public class RobotContainer {
   private void configureBindings() {
     ClawCMD open = new ClawCMD(claw);
     IntakeCommands toggle = new IntakeCommands(intake);
+    ExtenderCMD extend = new ExtenderCMD(extender);
+    OutakeCommands outtake = new OutakeCommands(intake);
     new JoystickButton(joystick, 1).toggleOnTrue(open);//Button LB
     new JoystickButton(joystick, 2).toggleOnTrue(toggle);
+    new JoystickButton(joystick, 3).toggleOnTrue(extend);
+    new JoystickButton(joystick, 4).toggleOnTrue(outtake);
   }
 
   /**
